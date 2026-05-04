@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://6h3pvmqs3kfm"]
+
+[ext_resource type="Script" uid="uid://diu7ropjqpxln" path="res://scenes/player/player.gd" id="1_8afob"]
+[ext_resource type="Texture2D" uid="uid://chfi53mv7ynv2" path="res://assets/icon.svg" id="2_dovo2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8afob"]
+size = Vector3(0.969177, 0.985718, 0.984253)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_8afob")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.0261841, 0.00490723, -0.00944824)
+shape = SubResource("BoxShape3D_8afob")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.5, 0)
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+current = true
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture = ExtResource("2_dovo2")
