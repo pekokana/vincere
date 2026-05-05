@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://6h3pvmqs3kfm"]
+[gd_scene load_steps=6 format=3 uid="uid://6h3pvmqs3kfm"]
 
 [ext_resource type="Script" uid="uid://diu7ropjqpxln" path="res://scenes/player/player.gd" id="1_8afob"]
-[ext_resource type="Texture2D" uid="uid://chfi53mv7ynv2" path="res://assets/icon.svg" id="2_dovo2"]
+[ext_resource type="PackedScene" uid="uid://pn66qbr0vune" path="res://assets/kenney_animated-characters-survivors/Model/characterMedium.fbx" id="2_dovo2"]
+[ext_resource type="Texture2D" uid="uid://dv6f4yd10g6b4" path="res://assets/kenney_animated-characters-survivors/Skins/survivorMaleB.png" id="3_gmlin"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8afob"]
 size = Vector3(0.969177, 0.985718, 0.984253)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvxji"]
+albedo_texture = ExtResource("3_gmlin")
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_8afob")
@@ -14,12 +18,18 @@ transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -0.0261841, 0.00490723,
 shape = SubResource("BoxShape3D_8afob")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1)
 spring_length = 3.0
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+transform = Transform3D(0.990437, 0.129643, 0.0471861, -0.129643, 0.991556, -0.00307351, -0.0471861, -0.00307325, 0.998881, 0.139191, -0.299376, 0.279217)
 current = true
+near = 0.5
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-billboard = 1
-texture = ExtResource("2_dovo2")
+[node name="Root Scene" parent="." instance=ExtResource("2_dovo2")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.523949, 0.252055, 1.11501)
+
+[node name="characterMedium" parent="Root Scene/RootNode/Root/Skeleton3D" index="0"]
+material_override = SubResource("StandardMaterial3D_lvxji")
+
+[editable path="Root Scene"]
